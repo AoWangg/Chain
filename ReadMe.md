@@ -24,6 +24,7 @@
 cd ~ 
 mkdir anchan & cd anchan
 curl -LO https://github.com/FISCO-BCOS/FISCO-BCOS/releases/download/v2.8.0/build_chain.sh && chmod u+x build_chain.sh #下载脚本
+curl -#LO https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/FISCO-BCOS/FISCO-BCOS/releases/v2.9.1/build_chain.sh && chmod u+x build_chain.sh  #网络差
 bash build_chain.sh -l 127.0.0.1:4 -p 30300,20200,8545 #部署4个节点
 ./nodes/127.0.0.1/start_all.sh #启动所有节点
 ```
@@ -48,7 +49,7 @@ cp ~/anchan/nodes/127.0.0.1/sdk/* ./bin #复制证书
 我们使用如下命令和 FISCO BCOS 区块链中的节点进行交互。
 
 ```sh
-./console.py getNodeVersion #检查SDK能否连接节点。
+./console2.py getNodeVersion #检查SDK能否连接节点。
 ```
 ## 四、 IPFS 集群
 
@@ -78,12 +79,12 @@ docker-compose up
 
 ## 五、安产链项目
 
-安产链项目的源代码部署在 Gitee 代码托管网站上。使用如下命令运行安产链项目：
+安产链项目的源代码部署在github网站上。使用如下命令运行安产链项目：
 
 ```sh
-git clone https://gitee.com/anchan-chain/anchan-chain.git #拉取源代码
+it clone https://github.com/AAooWW/Chain.git #拉取源代码
 
-cd anchan-chain
+cd Chain
 pip install -r requirement.txt
 mkdir -p ./bin/logs
 cp -r ${PATH_TO_PYTHON_SDK}/bin/* ./bin #将python-sdk的bin文件夹内容复制bin中
