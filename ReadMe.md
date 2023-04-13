@@ -16,6 +16,21 @@
 | docker | 20.10.7|
 | docker-compose | 1.25.0 |
 
+环境准备
+'''
+sudo apt install -y openssl curl
+# 安装默认Java版本(Java 8或以上)
+sudo apt install -y default-jdk
+# 查询Java版本
+java -version
+
+// 添加仓库，回车继续
+sudo add-apt-repository ppa:deadsnakes/ppa
+// 安装python 3.6
+sudo apt-get install -y python3.8
+sudo apt-get install -y python3-pip
+
+
 ## 二、Fisco BCOS 区块链
 
 可以使用 FISCO BCOS v2.8.0 项目及其文档推荐的 `build_chain.sh` 脚本快速搭建和部署区块链平台，具体使用的命令是
