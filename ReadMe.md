@@ -69,6 +69,20 @@ cp ~/anchan/nodes/127.0.0.1/sdk/* ./bin #复制证书
 chmod 755 ./console2.py
 sudo ln -s /usr/bin/python3 /usr/bin/python
 ./console2.py getNodeVersion #检查SDK能否连接节点。
+
+#输出如下即可：
+INFO >> BcosClient:  channel 127.0.0.1:20200,groupid :1,crypto type:ECDSA,ssl type:ECDSA
+INFO : getNodeVersion
+     : {
+    "Build Time": "20210830 12:52:15",
+    "Build Type": "Linux/clang/Release",
+    "Chain Id": "1",
+    "FISCO-BCOS Version": "2.8.0",
+    "Git Branch": "HEAD",
+    "Git Commit Hash": "30fb38ac5692468058abf6aa12869d2ae776c275",
+    "Supported Version": "2.8.0"
+}
+
 ```
 ## 四、 IPFS 集群
 
