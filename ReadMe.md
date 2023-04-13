@@ -105,6 +105,8 @@ VERSION_MAXIMUM   = "0.11.0"
 之后，回到ipfs-cluster-clt文件夹，利用docker-compose启动容器。
 
 ```
+sudo snap install docker
+sudo apt  install docker-compose
 docker-compose up 
 ```
 
