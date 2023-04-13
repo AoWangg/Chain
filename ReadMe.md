@@ -66,6 +66,7 @@ cp ~/anchan/nodes/127.0.0.1/sdk/* ./bin #复制证书
 我们使用如下命令和 FISCO BCOS 区块链中的节点进行交互。
 
 ```sh
+chmod 755 ./console2.py
 ./console2.py getNodeVersion #检查SDK能否连接节点。
 ```
 ## 四、 IPFS 集群
