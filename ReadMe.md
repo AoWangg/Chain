@@ -107,7 +107,9 @@ VERSION_MAXIMUM   = "0.11.0"
 ```
 sudo snap install docker
 sudo apt  install docker-compose
-docker-compose up 
+sudo docker-compose up -d
+#或者
+sudo docker-compose up 
 ```
 
 值得注意的是，我们修改了 docker-compose.yml 文件，使得其 node1 的相关端口被转发出来，以实现远程接入。
