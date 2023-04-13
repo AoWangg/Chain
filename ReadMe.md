@@ -193,6 +193,29 @@ docker run -p 3306:3306 --name mysql56 -v $PWD/sqlConf:/etc/mysql/conf.d -v $PWD
 我们需要进一步配置 WeBASE的相关信息，用于数据库接入等。
 
 ``` sh
+[common]
+
+# Webase Subsystem Version (v1.1.0 or above)
+webase.web.version=v1.5.3
+webase.mgr.version=v1.5.3
+webase.sign.version=v1.5.3
+webase.front.version=v1.5.3
+
+#####################################################################
+# if use [installDockerAll] to install WeBASE by docker
+# if use [installAll] or [installWeBASE], ignore configuration here
+
+# 1: enable mysql in docker
+# 0: mysql run in host, required fill in the configuration of webase-node-mgr and webase-sign
+docker.mysql=1
+
+# if [docker.mysql=1], mysql run in host (only works in [installDockerAll])
+# run mysql 5.6 by docker
+docker.mysql.port=23306
+# default user [root]
+docker.mysql.password=123456
+#####################################################################
+
 # Mysql database configuration of WeBASE-Node-Manager
 mysql.ip=127.0.0.1
 mysql.port=3306
@@ -206,10 +229,17 @@ sign.mysql.port=3306
 sign.mysql.user=root
 sign.mysql.password=123456
 sign.mysql.database=webasesign
+# if docker mysql disabled[docker.mysql=0] above
 
-# 由于与IPFS端口冲突，所以将5001-5004改为5100-5104
+# H2 database name of WeBASE-Front (docker mode ignore this)
+front.h2.name=webasefront
+front.org=fisco
+
 # WeBASE-Web service port 
-web.port=5100
+web.port=5000
+# enable WeBASE-Web overview pages for mobile phone(docker mode not support h5 yet)
+# (0: disable, 1: enable)
+web.h5.enable=1
 
 # WeBASE-Node-Manager service port
 mgr.port=5101
@@ -220,9 +250,40 @@ front.port=5102
 # WeBASE-Sign service port
 sign.port=5104
 
-# 由于使用已有区块链节点，故设置一下参数
+# Node listening IP
+node.listenIp=127.0.0.1
+# Node p2p service port
+node.p2pPort=30300
+# Node channel service port
+node.channelPort=20200
+# Node rpc service port
+node.rpcPort=8545
+
+# Encrypt type (0: standard, 1: guomi)
+encrypt.type=0
+# ssl encrypt type (0: standard ssl, 1: guomi ssl)
+# only guomi type support guomi ssl
+encrypt.sslType=0
+
+# Use existing chain or not (yes/no)
 if.exist.fisco=yes
-fisco.dir=/home/ubuntu/anchan/nodes/127.0.0.1
+
+### if build new chain, [if.exist.fisco=no]
+# Configuration required when building a new chain 
+# Fisco-bcos version
+fisco.version=2.8.0
+# Number of building nodes (default value: 2)
+node.counts=nodeCounts
+
+### if using exited chain, [if.exist.fisco=yes]
+# The path of the existing chain, the path of the start_all.sh script
+# Under the path, there should be a 'sdk' directory where the SDK certificates (ca.crt, sdk.crt, node.key and gm directory(gm ssl)) are stored
+fisco.dir=/home/aowang/anchan/nodes/127.0.0.1
+# Node directory in [fisco.dir] for WeBASE-Front to connect 
+# example: 'node.dir=node0' would auto change to '/data/app/nodes/127.0.0.1/node0'
+# Under the path, there is a conf directory where node certificates (ca.crt, node.crt and node.key) are stored
+node.dir=node0
+
 ```
 ### 6.4 启动 WeBASE 组件
 
