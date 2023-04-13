@@ -119,10 +119,10 @@ sudo docker-compose up
 安产链项目的源代码部署在github网站上。使用如下命令运行安产链项目：
 
 ```sh
-it clone https://github.com/AAooWW/Chain.git #拉取源代码
+git clone https://github.com/AAooWW/Chain.git #拉取源代码
 
 cd Chain
-pip install -r requirement.txt
+pip install -r requirements.txt
 mkdir -p ./bin/logs
 cp -r ${PATH_TO_PYTHON_SDK}/bin/* ./bin #将python-sdk的bin文件夹内容复制bin中
 ```
