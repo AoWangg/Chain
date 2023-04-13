@@ -67,6 +67,7 @@ cp ~/anchan/nodes/127.0.0.1/sdk/* ./bin #复制证书
 
 ```sh
 chmod 755 ./console2.py
+sudo ln -s /usr/bin/python3 /usr/bin/python
 ./console2.py getNodeVersion #检查SDK能否连接节点。
 ```
 ## 四、 IPFS 集群
