@@ -171,7 +171,7 @@ WeBASE 提供了方便的智能合约开发和调试平台，本节内容介绍 
 
 ```sh
 docker pull mysql:5.6
-sudo apt install mariadb-client-core-10.1 
+sudo apt install mariadb-client-core-10.3 
 pip3 install PyMySQL
 ```
 
