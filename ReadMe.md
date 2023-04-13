@@ -17,7 +17,7 @@
 | docker-compose | 1.25.0 |
 
 环境准备
-'''sh
+```sh
 sudo apt install -y openssl curl
 # 安装默认Java版本(Java 8或以上)
 sudo apt install -y default-jdk
@@ -29,8 +29,8 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 // 安装python 3.6
 sudo apt-get install -y python3.8
 sudo apt-get install -y python3-pip
+```
 
-'''
 
 ## 二、Fisco BCOS 区块链
 
