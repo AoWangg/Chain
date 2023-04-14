@@ -236,7 +236,7 @@ front.h2.name=webasefront
 front.org=fisco
 
 # WeBASE-Web service port 
-web.port=5000
+web.port=5100
 # enable WeBASE-Web overview pages for mobile phone(docker mode not support h5 yet)
 # (0: disable, 1: enable)
 web.h5.enable=1
