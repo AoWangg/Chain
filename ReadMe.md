@@ -112,7 +112,7 @@ sudo docker-compose up -d
 sudo docker-compose up 
 ```
 
-值得注意的是，我们修改了 docker-compose.yml 文件，使得其 node1 的相关端口被转发出来，以实现远程接入。
+***值得注意的是，我们修改了 docker-compose.yml 文件，使得其 node1 的相关端口被转发出来，以实现远程接入，要按照需求进行修改***
 
 ```
 version: '3.4'
