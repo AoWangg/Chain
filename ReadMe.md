@@ -27,6 +27,17 @@ sudo apt install -y default-jdk
 # 查询Java版本
 java -version
 
+#环境变量设置
+gedit /etc/profile
+
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+JRE_HOME=$JAVA_HOME/jre
+CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+export JAVA_HOME JRE_HOME CLASS_PATH PATH
+
+source /etc/profile
+
 // 添加仓库，回车继续
 sudo add-apt-repository ppa:deadsnakes/ppa
 // 安装python 3.6
