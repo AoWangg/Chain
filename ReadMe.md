@@ -11,7 +11,7 @@
 
 |  依赖   | 版本  |
 |  ----  | ----  |
-| Python  | 3.8.10 |
+| Python  | 3.8 |
 | pip    | 21.3.1 |
 | Java  | openjdk-11 |
 | Node.js  | 8.17.0 |
@@ -40,7 +40,7 @@ source /etc/profile
 
 // 添加仓库，回车继续
 sudo add-apt-repository ppa:deadsnakes/ppa
-// 安装python 3.6
+// 安装python 3.8
 sudo apt-get install -y python3.8
 sudo apt-get install -y python3-pip
 ```
