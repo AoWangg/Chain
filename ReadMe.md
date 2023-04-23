@@ -104,7 +104,10 @@ INFO : getNodeVersion
 ``` bash
 wget https://dist.ipfs.io/ipfs-cluster-ctl/v0.14.0/ipfs-cluster-ctl_v0.14.0_linux-amd64.tar.gz
 tar xvzf ipfs-cluster-ctl_v0.14.0_linux-amd64.tar.gz
-cd ipfs-cluster-ctl & wget https://raw.githubusercontent.com/ipfs/ipfs-cluster/master/docker-compose.yml
+cd ipfs-cluster-ctl 
+wget https://raw.githubusercontent.com/ipfs/ipfs-cluster/master/docker-compose.yml
+
+#要修改docker-compose.yml
 
 ```
 安产链项目使用名为 ipfshttpclient 的 Python 库实现 IPFS 文件系统的调用。但是，由于 ipfshttpclient 的版本限制，需要修改源码如下：
