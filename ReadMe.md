@@ -1,5 +1,5 @@
 # 安产链-运行指引
-来源：https://github.com/FISCO-BCOS/hackathon/blob/master/2021-Shenzhen-FinTechathon3/Anchan-chain/Project/ReadMe.md
+参考：https://github.com/FISCO-BCOS/hackathon/blob/master/2021-Shenzhen-FinTechathon3/Anchan-chain/Project/ReadMe.md
 
 仅学习使用
 
