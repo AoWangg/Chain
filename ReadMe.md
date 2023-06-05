@@ -55,7 +55,7 @@ cd ~
 mkdir anchan & cd anchan
 curl -LO https://github.com/FISCO-BCOS/FISCO-BCOS/releases/download/v2.8.0/build_chain.sh && chmod u+x build_chain.sh #下载脚本
 curl -#LO https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/FISCO-BCOS/FISCO-BCOS/releases/v2.9.1/build_chain.sh && chmod u+x build_chain.sh  #网络差
-bash build_chain.sh -l 127.0.0.1:4 -p 30300,20200,8545 #部署4个节点
+bash build_chain.sh -l 127.0.0.1:8 -p 30300,20200,8545 #部署4个节点
 ./nodes/127.0.0.1/start_all.sh #启动所有节点
 ```
 
