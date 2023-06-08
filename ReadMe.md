@@ -1,13 +1,10 @@
-# 安产链-运行指引
-参考：https://github.com/FISCO-BCOS/hackathon/blob/master/2021-Shenzhen-FinTechathon3/Anchan-chain/Project/ReadMe.md
-
 仅学习使用
 
 本文档提供了安产链项目的部署和运行指引。我们主要使用了 FISCO BCOS 区块链及其 Python SDK 、 IPFS 星际文件系统、 WeBase 区块链开发平台、 Truora 预言机以及 Hyperledger Caliper 压力测试平台。
 
 ## 一、基本运行环境
 
-安产链项目在 Ubuntu 20.04 操作系统上编译部署成功，系统运行于腾讯云的 8C16G 虚拟机上。本项目使用的基本框架及其版本是：
+安产链项目在 Ubuntu 20.04 操作系统上编译部署成功，系统运行于本地 8C8G 虚拟机上。本项目使用的基本框架及其版本是：
 
 |  依赖   | 版本  |
 |  ----  | ----  |
@@ -110,7 +107,7 @@ wget https://raw.githubusercontent.com/ipfs/ipfs-cluster/master/docker-compose.y
 
 ```
 安产链项目使用名为 ipfshttpclient 的 Python 库实现 IPFS 文件系统的调用。但是，由于 ipfshttpclient 的版本限制，需要修改源码如下：
-
+（在执行完Chain项目的requirement.txt后再修改）
 ``` sh
 cd $HOME/.local/lib/python3.8/site-packages/ipfshttpclient/client
 # 将__init__.py中的VERSION_MAXIMUM改为：
