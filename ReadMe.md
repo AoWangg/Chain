@@ -509,7 +509,7 @@ cd ${PATH_TO_PYTHON_SDK}
 
 ```
 
-### 8.5 执行 HelloWorld 合约测试
+### 7.5 执行 HelloWorld 合约测试
 我们使用了如下命令对 HelloWorld 智能合约进行性能测试。
 
 ```
