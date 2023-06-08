@@ -430,45 +430,10 @@ node.dir=node0
 python deploy.py installAll # 启动WeBASE服务
 ```
 
-## 七、 Truora 可信预言机
-
-我们的项目使用了 FISCO BCOS 的可信预言机组件实现审查实体和仲裁实体的随机选取。因此，需要不熟 Truora 可信预言机组件。
-
-### 7.1 拉取源码
-
-使用如下命令拉取 Truora 项目源码：
-
-```sh
-wget "https://github.com/WeBankBlockchain/Truora-Service/releases/download/v1.1.0/docker-deploy.zip"
-unzip docker-deploy.zip -d docker-deploy # 必须加-d 参数，否则会将所有内容解压到当前文件夹
-```
-
-### 7.2 创建数据库
-使用如下 mysql 语句创建 Truora 所需的数据库：
-
-``` sh 
-mysql -h 127.0.0.1 -P 3306 -u root -p
-> CREATE DATABASE `truora`;
-```
-
-### 7.3 进一步修改配置文件
-
-由于 docker 已经启动了。但是，我们发现当使用普通用户的权限时，运行 `deploy_single.sh` 脚本是无法使用的。因此，我们使用命令 `systemctl start docker` 启动docker。 之后，将 `docker-deploy/util/utils.sh` 的 135 行的内容 `systemctl start docker` 注释掉，以跳过启动 truora-web 和 truora-service 容器启动后检查端口部分。还需要将 `docker-deploy/start.sh` 的 59-67 行代码注释。
-
-> 注：节点sdk文件夹中没有 `node.key` 和 `node.crt` 文件，必须要将某个区块链节点的 `conf` 文件夹中的 `node.key` 和 `node.crt` 复制到 sdk 文件夹中。
-
-### 7.4 启动docker-deploy 
-
-我们使用如下命令启动 Truora：
-
-```sh
-bash deploy_single.sh -d
-```
-
-## 八、压力测试工具 Hyperledger Caliper 
+## 七、压力测试工具 Hyperledger Caliper 
 最后，我们使用 Caliper 工具实现了自动化的区块链智能合约压力测试和性能评估。
 
-### 8.1 获取 Caliper 代码
+### 7.1 获取 Caliper 代码
 
 使用如下命令获取 Caliper 的基本代码
 ```sh
@@ -480,18 +445,18 @@ npx caliper bind --caliper-bind-sut fisco-bcos --caliper-bind-sdk latest
 git clone https://github.com/vita-dounai/caliper-benchmarks.git
 ```
 
-### 8.2 修改 Caliper 源码
+### 7.2 修改 Caliper 源码
 我们发现， Caliper 项目无法正常启动。通过阅读[issue1248](https://github.com/FISCO-BCOS/FISCO-BCOS/issues/1248)相关描述和 [pull request 647](https://github.com/hyperledger/caliper/pull/647/files)，我们修改了一下文件： `benchmarks/node_modules/@hyperledger/caliper-fisco-bcos/lib/channelPromise.js` 、 `benchmarks/node_modules/@hyperledger/caliper-fisco-bcos/lib/fiscoBcos.js` 、 `benchmarks/node_modules/@hyperledger/caliper-fisco-bcos/lib/web3lib/web3sync.js`。
 
 根据 [issue1721](https://github.com/FISCO-BCOS/FISCO-BCOS/issues/1721#event-3661578575)， 我们修改了 `benchmarks/node_modules/@hyperledger/caliper-fisco-bcos/package.json` 中的 `dependencies` 并添加一项 `"secp256k1": "^3.8.0"` 并执行 `npm -i `。
 
-### 8.3 创建账户
+### 7.3 创建账户
 使用如下命令创建账户：
 ```
 cd ${PATH_TO_PYTHON_SDK}
 ./console.py newaccount ${newAccount} ${accountPrivkey}
 ```
-### 8.4 修改fisco-bcos.json 配置文件
+### 7.4 修改fisco-bcos.json 配置文件
 
 由于我们使用本地方式构建了 FISCO 区块链系统，因此需要创建新账户并修改 `benchmarks/caliper-benchmarks/networks/fisco-bcos/4nodes1group/fisco-bcos.json` 配置文件。
 
