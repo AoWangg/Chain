@@ -15,3 +15,21 @@
     border-radius: 0 2px 2px 0;
     background-color: #FFFFFF;
 }
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  text-align: center;
+  border: 2px solid rgb(35, 38, 46); /* 将表格外部边框加粗 */
+}
+
+table th,
+table td {
+  padding: 8px 16px;
+  border: 2px solid rgb(35, 38, 46); /* 将表格内部边框加粗 */
+}
+
+table thead th {
+  background-color: #009688;
+  color: #FFFFFF;
+}

@@ -1,0 +1,96 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% extends "layout.html" %} {%block left%} {% if not is_login %}
+<li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">实体模块</a>
+    <dl class="layui-nav-child">
+        <dd><a href="/container">货物进口商模块</a></dd>
+        <dd><a href="/container">委托人模块</a></dd>
+        <dd><a href="/carrier">运输机构模块</a></dd>
+        <dd><a href="/container">仓库机构模块</a></dd>
+        <dd><a href="/maritime">海事部门模块</a></dd>
+        <dd><a href="/maritime">应急部门模块</a></dd>
+        <dd><a href="/maritime">交通部门模块</a></dd>
+        <dd><a href="/maritime">公安部门模块</a></dd>
+    </dl>
+</li>
+
+{%else%}
+<li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">海事部门</a>
+    <dl class="layui-nav-child">
+        <dd class=layui-this><a href="/maritime">部门信息面板</a></dd>
+        <dd><a href="/maritime/get_goods_info">获取进口货物信息</a></dd>
+    </dl>
+</li>
+{%endif%}
+{%endblock%}
+
+
+{%block main%}
+
+{% if not is_login %}
+<div class=layui-row style="width: 50%;">
+    <div class=layui-col-4>
+        <form class="layui-form" method="POST">
+            <div class="layui-form-item">
+                <label class=layui-form-label for="name">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name=name class="layui-input" id="name">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="password" class=layui-form-label>密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name=password class="layui-input" id="password">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn">登录（注册）</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{%else%}
+<div class=layui-row>
+    <div class="layui-card">
+        <div class="layui-card-header">海事部门名称： {{username}}</div>
+        <div class="layui-card-body">
+            <p>账户地址： {{maritime.account_addr}}</p>
+            <p>合约地址： {{maritime.contract_addr}}</p>
+        </div>
+    </div>
+</div>
+
+{#<!-- container.html -->#}
+{#<div class="layui-row">#}
+{#  <div class="layui-card">#}
+{#    <div class="layui-card-header"><strong>已上报货物信息</strong></div>#}
+{#    <div class="layui-card-body">#}
+{#      <table style="width:100%;background-color:#fff">#}
+{#        <thead>#}
+{#          <tr>#}
+{#            <th>货物ID</th>#}
+{#            <th>货物类型</th>#}
+{#            <th>货物名称</th>#}
+{#            <th>货物重量</th>#}
+{#          </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#          {% for row in goodsdata %}#}
+{#            <tr>#}
+{#              <td>{{ row[0] }}</td>#}
+{#              <td>{{ row[1] }}</td>#}
+{#              <td>{{ row[2] }}</td>#}
+{#              <td>{{ row[3] }}</td>#}
+{#            </tr>#}
+{#          {% endfor %}#}
+{#        </tbody>#}
+{#      </table>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+
+{%endif%}
+{%endblock%}

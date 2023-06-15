@@ -37,8 +37,8 @@ class client_config:
     
     # ---------account &keyfile config--------------
     # 注意账号部分，国密和ECDSA采用不同的配置
-    contract_info_file = "/home/aowang/anchan/anchan-chain/bin/contract.ini"  # 保存已部署合约信息的文件
-    account_keyfile_path = "/home/aowang/anchan/anchan-chain/bin/accounts"  # 保存keystore文件的路径，在此路径下,keystore文件以 [name].keystore命名
+    contract_info_file = "/home/aowang/anchan/Chain/bin/contract.ini"  # 保存已部署合约信息的文件
+    account_keyfile_path = "/home/aowang/anchan/Chain/bin/accounts"  # 保存keystore文件的路径，在此路径下,keystore文件以 [name].keystore命名
     account_keyfile = "pyaccount.keystore"
     account_password = "123456"  # 实际使用时建议改为复杂密码
     gm_account_keyfile = "gm_account.json"  # 国密账号的存储文件，可以加密存储,如果留空则不加载
@@ -53,4 +53,4 @@ class client_config:
     gm_solc_path = "/home/aowang/anchan/python-sdk/bin/solc/v0.4.25/solc-gm"
     solcjs_path = "/home/aowang/anchan/python-sdk/solcjs"
 
-    logdir = "/home/aowang/anchan/anchan-chain/bin/logs"  # 默认日志输出目录，该目录必须先建立
+    logdir = "/home/aowang/anchan/Chain/bin/logs"  # 默认日志输出目录，该目录必须先建立

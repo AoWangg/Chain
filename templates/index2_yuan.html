@@ -1,0 +1,42 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% extends "layout.html" %}
+
+{%block left%}
+
+<li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">实体模块</a>
+    <dl class="layui-nav-child">
+        <dd><a href="/enterprise">运输企业模块</a></dd>
+        <dd><a href="/agency">知识节点模块</a></dd>
+        <dd><a href="/audit">监管部门模块</a></dd>
+    </dl>
+</li>
+
+{%endblock%}
+
+{%block main%}
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md6">
+        <div class="layui-panel">
+            <div style="padding: 30px;">运输企业数量： {{count[0]}}</div>
+        </div>   
+    </div>
+    <div class="layui-col-md6">
+        <div class="layui-panel">
+            <div style="padding: 30px;">知识节点数量：{{count[1]}}</div>
+        </div>   
+    </div>
+    <div class="layui-col-md6">
+        <div class="layui-panel">
+            <div style="padding: 30px;">监管机构数量：{{count[2]}}</div>
+        </div>   
+    </div>
+    <div class="layui-col-md6">
+        <div class="layui-panel">
+            <div style="padding: 30px;">公众数量：{{count[3]}}</div>
+        </div>   
+    </div>
+</div>   
+{%endblock%}
+
+

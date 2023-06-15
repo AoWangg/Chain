@@ -2,14 +2,14 @@
 <li class="layui-nav-item layui-nav-itemed">
     <a href="javascript:;">实体模块</a>
     <dl class="layui-nav-child">
-        <dd class=layui-this><a href="/enterprise">生产企业模块</a></dd>
-        <dd><a href="/agency">安评机构模块</a></dd>
+        <dd class=layui-this><a href="/enterprise">运输企业模块</a></dd>
+        <dd><a href="/agency">知识节点模块</a></dd>
         <dd><a href="/audit">监管部门模块</a></dd>
     </dl>
 </li>
 {%else%}
 <li class="layui-nav-item layui-nav-itemed">
-    <a href="javascript:;">生产企业</a>
+    <a href="javascript:;">运输企业</a>
     <dl class="layui-nav-child">
         <dd class=layui-this><a href="/enterprise">企业信息面板</a></dd>
         <dd><a href="/enterprise/upload">安评报告材料上传</a></dd>
@@ -48,7 +48,7 @@
 {%else%}
 <div class=layui-row>
     <div class="layui-card">
-        <div class="layui-card-header">生产企业名称： {{username}}</div>
+        <div class="layui-card-header">运输企业名称： {{username}}</div>
         <div class="layui-card-body">
             <p>账户地址： {{enterprise.account_addr}}</p>
             <p>合约地址： {{enterprise.contract_addr}}</p>
@@ -66,9 +66,10 @@
     </div>
 </div>
 {% if enterprise.ent_name == "" %}
+
 <div class=layui-row style="padding-top: 30px;">
     <div class="layui-card">
-        <div class="layui-card-header">设置生产企业基本信息</div>
+        <div class="layui-card-header">设置运输企业基本信息</div>
         <div class="layui-card-body" style="width: 400px;">
             <form class="layui-form" action="/enterprise/apply" method="POST">
                 <div class="layui-form-item">

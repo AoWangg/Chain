@@ -21,9 +21,9 @@ from models import Contracts, Engineer, db
 from config import debug
 from __init__ import app
 
-ContractsList = ["Agency", "Arbitrate", "Credit","EngineerList", "Enterprise", "License", "Management","ReportEvaluation", "Accusation"]
+ContractsList = ["Agency", "state", "Arbitrate", "Credit","EngineerList", "Enterprise", "License", "Management","ReportEvaluation", "Accusation","Im_goods"]
 
-UniqueContractsList = ["Accusation", "Credit", "EngineerList", "Management"]
+UniqueContractsList = ["Accusation", "state", "Credit", "EngineerList", "Management","Im_goods"]
 
 def create_account(name, password = ""):
     ac = Account.create(password)
@@ -104,6 +104,8 @@ def call_contract(contract_addr: str, contract_name: str, fn_name: str, args: Li
         app.logger.warn(f"receipt: {receipt}")
         print(msg)
         raise Exception(f"contract error: {msg}")
+
+
     txhash = receipt['transactionHash']
     txresponse = client.getTransactionByHash(txhash)
     inputresult = data_parser.parse_transaction_input(txresponse['input'])
@@ -171,7 +173,19 @@ def init_accounts():
         import audit
         au, signer = audit.signup(name, password)
         app.logger.info(f"创建账户:{au}")
-    
+
+def ini_all_acounts():
+    password = ""
+    enterprise_list = [("运输公司A1", "王A", "某某省某某市", "有限责任公司", "危险货物运输")]
+    for elem in enterprise_list:
+        name = elem[0]
+        import enterprise
+        ent, signer = enterprise.signup(name, password)
+        call_contract(ent.contract_addr, "Enterprise", "setInformation", args = [name, elem[1], elem[2], elem[3], elem[4]], signer = signer)
+        app.logger.info(f"创建账户:{ent}")
+
+
+
 def init():
     """
     compile all contracts and deploy common contracts

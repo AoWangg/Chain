@@ -63,6 +63,7 @@ def signup(username, password) -> Tuple[Enterprise, Signer_Impl]:
         return None, None
     return enterprise, signer
 
+
 @app.route("/enterprise", methods = ["GET", "POST"])
 def enterprise():
     if request.method == "GET":
@@ -83,6 +84,7 @@ def enterprise():
     session["username"] = username
     session["password"] = password
     return render_template("enterprise2.html", is_login = True, succ_msg = "登录成功", enterprise = enterprise, username = username)
+
 
 @app.route("/enterprise/apply", methods=["POST"])
 def enterprise_apply():
@@ -116,7 +118,9 @@ def enterprise_apply():
         return render_template("enterprise2.html", is_login = True, fail_msg = "添加信息失败", enterprise = enterprise, username = username)
     return render_template("enterprise2.html", is_login = True, succ_msg = "添加信息成功", enterprise = enterprise, username = username)
 
+
 @app.route("/enterprise/evaluation")
+
 def enterprise_evaluation():
     username = session.get("username", "")
     password = session.get("password", "")
@@ -124,6 +128,7 @@ def enterprise_evaluation():
     enterprise, signer = login(username, password)
     if enterprise is None:
         return redirect("/enterprise")
+
 
     evaluation_addr = enterprise.evaluation_addr
     _,al,_,_ = count_numbers()

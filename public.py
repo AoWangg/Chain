@@ -7,6 +7,7 @@ import time
 from __init__ import app
 from blockchain import call_contract, to_checksum_address
 from models import Agency, Contracts, Enterprise, Audit, Engineer, count_numbers
+from models import Contracts, Container, Maritime, IPFSObject, db, count_numbers
 
 def check_login():
     return session.get("username") is not None
@@ -21,7 +22,7 @@ def license_handle(addr):
         res2 = call_contract(addr, "License", "showInfo", args = [])
     except Exception:
         traceback.print_exc()
-        return render_template("index2.html", is_login = is_login, fail_msg = "证书合约地址错误或合约调用失败", count = count_numbers())
+        return render_template("index2.html", is_login = is_login, fail_msg ="证书合约地址错误或合约调用失败", count = count_numbers())
 
     res2 = list(res2)
     license_info = list(res)
@@ -54,17 +55,21 @@ def license_handle(addr):
 
 @app.route("/search", methods = ["GET", "POST"])
 def search():
+
     is_login = check_login()
 
     if request.method == "GET":
         return render_template("search2.html", is_login = is_login)
 
-    name = request.form.get("name", None)
-    if name is None:
-        return render_template("search2.html", is_login = is_login, fail_msg = "没有查询关键词")
+    goodsid = int(request.form.get("goodsid", None))
+    if goodsid is None:
+        return render_template("search2.html", is_login = is_login, fail_msg = "没有查询到货物信息")
+    goodsin_Addr = db.session.query(Contracts).filter(Contracts.name == "goods").first().addr
+    Goodsdata = call_contract(goodsin_Addr, "goods", "filterGoodsInfo",
+                         args=[goodsid])
+    goodsdata = list(zip(*Goodsdata))
 
-    result = Enterprise.query.filter(Enterprise.username.like(f"%{name}%")).all()
-    return render_template("search2.html", is_login = is_login, result = result)
+    return render_template("search2.html", is_login = is_login,  goodsdata = goodsdata)
 
 @app.route("/report", methods = ["GET", "POST"])
 def search_report():
@@ -73,22 +78,23 @@ def search_report():
     if request.method == "GET":
         return render_template("report2.html", is_login = is_login)
 
-    name = request.form.get("name", None)
-    msg = request.form.get("msg", None)
-    if name is None or msg is None or name == "" or msg == "":
-        return render_template("report2.html", is_login = is_login, fail_msg = "举报对象或关键词为空")
-    
-    audit = Audit.query.filter(Audit.username == name).first()
-    if audit is None:
-        return render_template("report2.html", is_login = is_login, fail_msg = "未找到该监管部门")
+    goodsid = int(request.form.get("goodsid", None))
+    if goodsid is None:
+        return render_template("search2.html", is_login=is_login, fail_msg="没有查询到货物信息")
 
-    try:
-        AccusationAddr = Contracts.query.filter(Contracts.name == "Accusation").first().addr
-        call_contract(AccusationAddr, "Accusation", "addAccusation", args = ["", msg ,"", name])
-    except Exception:
-        traceback.print_exc()
-        return render_template("report2.html", is_login = is_login, succ_msg = "举报合约执行失败")
-    return render_template("report2.html", is_login = is_login, succ_msg = "举报成功，举报合约执行成功")
+    state_Addr = db.session.query(Contracts).filter(Contracts.name == "state").first().addr
+
+    goodsinfo1 = call_contract(state_Addr, "state", "getTransitionsNoGoodsId1",
+                        args=[goodsid])
+    goodsinfo2 = call_contract(state_Addr, "state", "getTransitionsNoGoodsId2",
+                        args=[goodsid])
+
+    goodsdata1 = list(zip(*goodsinfo1))
+    goodsdata2 = list(zip(*goodsinfo2))
+    goodsdata = [item1 + item2 for item1, item2 in zip(goodsdata1, goodsdata2)]
+
+
+    return render_template("report2.html", is_login = is_login, succ_msg = "货物状态查询成功", goodsdata=goodsdata)
 
 
 @app.route("/pubkey", methods = ["GET", "POST"])

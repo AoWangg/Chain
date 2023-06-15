@@ -5,19 +5,19 @@
 <li class="layui-nav-item layui-nav-itemed">
     <a href="javascript:;">实体模块</a>
     <dl class="layui-nav-child">
-        <dd><a href="/enterprise">生产企业模块</a></dd>
-        <dd class=layui-this><a href="/agency">安评机构模块</a></dd>
+        <dd><a href="/enterprise">运输企业模块</a></dd>
+        <dd class=layui-this><a href="/agency">知识节点模块</a></dd>
         <dd><a href="/audit">监管部门模块</a></dd>
     </dl>
 </li>
 {%else%}
 <li class="layui-nav-item layui-nav-itemed">
-    <a href="javascript:;">安评机构</a>
+    <a href="javascript:;">知识节点机构</a>
     <dl class="layui-nav-child">
         <dd class=layui-this><a href="/agency">基本信息</a></dd>
-        <dd><a href="/agency/engineer">安评师管理</a></dd>
-        <dd><a href="/agency/upload">安评报告上传</a></dd>
-        <dd><a href="/agency/evaluation">审查安评报告</a></dd>
+        <dd><a href="/agency/engineer">知识节点管理</a></dd>
+        <dd><a href="/agency/upload">知识图谱上传</a></dd>
+        <dd><a href="/agency/evaluation">知识图谱审查</a></dd>
     </dl>
 </li>
 {%endif%}
@@ -51,11 +51,11 @@
 {%else%}
 <div class=layui-row>
     <div class="layui-card">
-        <div class="layui-card-header">安评机构名称： {{username}}</div>
+        <div class="layui-card-header">知识节点机构名称： {{username}}</div>
         <div class="layui-card-body">
             <p>账户地址：{{agency.account_addr}}</p>
-            <p>安评机构合约地址：{{agency.contract_addr}}</p>
-            <p>安评师列表合约地址：{{agency.engineer_list_addr}}</p>
+            <p>知识节点机构合约地址：{{agency.contract_addr}}</p>
+            <p>知识节点列表合约地址：{{agency.engineer_list_addr}}</p>
             {%if agency.envelope_pub%}
             <a href="/agency/dl_key" class="layui-btn layui-btn-sm layui-btn-danger">下载数字信封私钥</a>
             <a href="/agency/dl_pub" class="layui-btn layui-btn-sm layui-btn-normal">下载数字信封公钥</a> 

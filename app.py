@@ -12,10 +12,19 @@ import audit
 import enterprise
 import agency
 import public
+import container
+import consignee
+import carrier
+import maritime
 
 audit.load()
 enterprise.load()
 agency.load()
+container.load()
+consignee.load()
+carrier.load()
+maritime.load()
+
 
 @app.route("/")
 def index():
@@ -52,7 +61,7 @@ def handle_500(e):
     return render_template('error2.html', is_login = is_login, error_code = "500, Internal Server Error", error_msg = "服务器错误，请稍后重试"), 500
 
 if __name__ == "__main__":
-    compile_and_abis(compile=False)
+    compile_and_abis(is_compile=False)
     
     app.logger.info(f"starting server at {host}:{port} (debug={debug})")
     app.run(host=host, port=port, debug=debug)

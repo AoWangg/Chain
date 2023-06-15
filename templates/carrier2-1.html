@@ -1,0 +1,58 @@
+{% extends "layout.html" %} {%block left%} {% if not is_login %}
+<li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">实体模块</a>
+    <dl class="layui-nav-child">
+        <dd><a href="/container">货物进口商模块</a></dd>
+        <dd><a href="/container">委托人模块</a></dd>
+        <dd><a href="/carrier">运输机构模块</a></dd>
+        <dd><a href="/container">仓库机构模块</a></dd>
+        <dd><a href="/maritime">海事部门模块</a></dd>
+        <dd><a href="/maritime">应急部门模块</a></dd>
+        <dd><a href="/maritime">交通部门模块</a></dd>
+        <dd><a href="/maritime">公安部门模块</a></dd>
+    </dl>
+</li>
+{%else%}
+<li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">运输企业</a>
+    <dl class="layui-nav-child">
+        <dd class=layui-this><a href="/carrier">企业信息面板</a></dd>
+        <dd><a href="/carrier/upload">运输资质申请</a></dd>
+        <dd><a href="/carrier/ele">电子运单上报</a></dd>
+    </dl>
+</li>
+{%endif%} {%endblock%} {%block main%}
+
+<div class=layui-row>
+    <div class="layui-card">
+        <div class="layui-card-header">上传资质审核材料</div>
+        <div class="layui-card-body">
+
+            <form class="layui-form" action="/carrier/upload" method="POST" enctype="multipart/form-data">
+
+                <div class=" layui-form-item ">
+                    <label class=layui-form-label for="data-file ">资质材料</label>
+                    <!-- <input type="file " name=data-file class="layui-input " id="data-file "> -->
+                    <div class=layui-input-inline>
+                        <input type="file" name=data-file class=" " id="data-file">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class=layui-form-label for="data-hash">文件描述</label>
+                    <div class=layui-input-inline>
+                        <input type="text" name=data-hash class="layui-input" id="data-hash">
+                    </div>
+                </div>
+
+                <div class=" layui-form-item ">
+                    <div class=layui-input-block>
+                        <button type="submit " class="layui-btn ">上传材料</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{%endblock%}

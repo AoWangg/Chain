@@ -7,9 +7,14 @@
 <li class="layui-nav-item layui-nav-itemed">
     <a href="javascript:;">实体模块</a>
     <dl class="layui-nav-child">
-        <dd><a href="/enterprise">生产企业模块</a></dd>
-        <dd><a href="/agency">安评机构模块</a></dd>
-        <dd><a href="/audit">监管部门模块</a></dd>
+        <dd><a href="/container">货物进口商模块</a></dd>
+        <dd><a href="/container">委托人模块</a></dd>
+        <dd><a href="/carrier">运输机构模块</a></dd>
+        <dd><a href="/container">仓库机构模块</a></dd>
+        <dd><a href="/maritime">海事部门模块</a></dd>
+        <dd><a href="/maritime">应急部门模块</a></dd>
+        <dd><a href="/maritime">交通部门模块</a></dd>
+        <dd><a href="/maritime">公安部门模块</a></dd>
     </dl>
 </li>
 {%endif%}
@@ -18,29 +23,56 @@
 {%block main%}
 <div class=layui-row>
     <div class="layui-card">
-        <div class="layui-card-header">举报</div>
-        <div class="layui-card-body" style="width: 400px;">
-            <form class="layui-form" action="/report" method="POST">
+        <div class="layui-card-header">货物监管状态查询</div>
+        <div class="layui-card-body">
+            <form class="layui-form"  method="POST">
                 <div class="layui-form-item">
-                    <label class=layui-form-label for="name">监管部门</label>
-                    <div class=layui-input-block>
-                        <input type="text" name=name class="layui-input" id="name">
+                    <label class="layui-form-label" for="goodsid">货物ID</label>
+                    <div class="layui-input-block">
+                        <input type="number" name=goodsid class="layui-input" id="goodsid">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class=layui-form-label for="msg">举报消息</label>
-                    <div class=layui-input-block>
-                        <input type="text" name=msg class="layui-input" id="msg">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class=layui-input-block>
-                        <button type="submit" class="layui-btn">举报</button>
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn">查询</button>
                     </div>
                 </div>
             </form>
+
+            {%if goodsdata%}
+            <div class="layui-row">
+              <div class="layui-card">
+                <div class="layui-card-header"><strong>货物信息追溯</strong></div>
+                <div class="layui-card-body">
+                  <table style="width:100%;background-color:#fff">
+                    <thead>
+                      <tr>
+                        <th>起始状态</th>
+                        <th>终止状态</th>
+                        <th>状态转换时间戳</th>
+                        <th>调用合约地址</th>
+                        <th>监管部门地址</th>
+                        <th>企业地址</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for row in goodsdata %}
+                        <tr>
+                          <td>{{ row[0] }}</td>
+                          <td>{{ row[1] }}</td>
+                          <td>{{ row[2] }}</td>
+                          <td>{{ row[3] }}</td>
+                          <td>{{ row[4] }}</td>
+                          <td>{{ row[5] }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            {%endif%}
         </div>
     </div>
 </div>
-
 {%endblock%}

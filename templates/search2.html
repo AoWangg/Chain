@@ -7,9 +7,14 @@
 <li class="layui-nav-item layui-nav-itemed">
     <a href="javascript:;">实体模块</a>
     <dl class="layui-nav-child">
-        <dd><a href="/enterprise">生产企业模块</a></dd>
-        <dd><a href="/agency">安评机构模块</a></dd>
-        <dd><a href="/audit">监管部门模块</a></dd>
+        <dd><a href="/container">货物进口商模块</a></dd>
+        <dd><a href="/container">委托人模块</a></dd>
+        <dd><a href="/carrier">运输机构模块</a></dd>
+        <dd><a href="/container">仓库机构模块</a></dd>
+        <dd><a href="/maritime">海事部门模块</a></dd>
+        <dd><a href="/maritime">应急部门模块</a></dd>
+        <dd><a href="/maritime">交通部门模块</a></dd>
+        <dd><a href="/maritime">公安部门模块</a></dd>
     </dl>
 </li>
 {%endif%}
@@ -18,13 +23,13 @@
 {%block main%}
 <div class=layui-row>
     <div class="layui-card">
-        <div class="layui-card-header">安全许可链上查询</div>
+        <div class="layui-card-header">货物信息链上追溯</div>
         <div class="layui-card-body">
             <form class="layui-form"  method="POST">
                 <div class="layui-form-item">
-                    <label class="layui-form-label" for="name">企业名称</label>
+                    <label class="layui-form-label" for="goodsid">货物ID</label>
                     <div class="layui-input-block">
-                        <input type="text" name=name class="layui-input" id="name">
+                        <input type="number" name=goodsid class="layui-input" id="goodsid">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -34,35 +39,86 @@
                 </div>
             </form>
 
-            {%if result%}
-            <table class="layui-table">
-                <thead>
-                    <tr>
-                        <th>生产企业</th>
-                        <th>证书地址</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {%for ret in result %}
-                    {%if ret.license_addr%}
-                    <tr>
-                        <td>{{ret.username}}</td>
-                        <td>{{ret.license_addr}}</td>
-                        <td><a href="/license/{{ret.license_addr}}" class="layui-btn layui-btn-sm">查看证书</a></td>
-                    </tr>
-                    {%else%}
-                    <tr>
-                        <td>{{ret.username}}</td>
-                        <td>暂无证书上链</td>
-                        <td></td>
-                    </tr>
-                    {%endif%}
-                    {%endfor%}
-                  </tbody>
-            </table>
+            {%if goodsdata%}
+            <div class="layui-row">
+              <div class="layui-card">
+                <div class="layui-card-header"><strong>货物信息追溯</strong></div>
+                <div class="layui-card-body">
+                  <table style="width:100%;background-color:#fff">
+                    <thead>
+                      <tr>
+                        <th>货物类型</th>
+                        <th>货物名称</th>
+                        <th>货物重量（kg）</th>
+                        <th>上报人地址</th>
+                        <th>监管部门</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for row in goodsdata %}
+                        <tr>
+                          <td>{{ row[0] }}</td>
+                          <td>{{ row[1] }}</td>
+                          <td>{{ row[2] }}</td>
+                          <td>{{ row[3] }}</td>
+                          <td>{{ row[4] }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="layui-row">
+              <div class="layui-card">
+                <div class="layui-card-header"><strong>货物重量折线图</strong></div>
+                <div class="layui-card-body">
+                  <canvas id="myChart"></canvas>
+                </div>
+              </div>
+            </div>
             {%endif%}
         </div>
     </div>
 </div>
+<script src="https://cdn.bootcss.com/Chart.js/2.7.2/Chart.min.js"></script>
+<script>
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [{% for row in goodsdata %}"{{ row[4] }}",{% endfor %}].filter((v, i, a) => a.indexOf(v) === i),
+      datasets: [{
+        label: '货物重量',
+        data: [{% for row in goodsdata %}"{{ row[2] }}",{% endfor %}],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+</script>
 {%endblock%}

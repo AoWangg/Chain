@@ -1,0 +1,58 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% extends "layout.html" %} {%block left%} {% if not is_login %}
+<li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">实体模块</a>
+    <dl class="layui-nav-child">
+        <dd><a href="/container">货物进口商模块</a></dd>
+        <dd><a href="/container">委托人模块</a></dd>
+        <dd><a href="/carrier">运输机构模块</a></dd>
+        <dd><a href="/container">仓库机构模块</a></dd>
+        <dd><a href="/maritime">海事部门模块</a></dd>
+        <dd><a href="/maritime">应急部门模块</a></dd>
+        <dd><a href="/maritime">交通部门模块</a></dd>
+        <dd><a href="/maritime">公安部门模块</a></dd>
+    </dl>
+</li>
+
+{%else%}
+<li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">海事部门</a>
+    <dl class="layui-nav-child">
+        <dd class=layui-this><a href="/maritime">部门信息面板</a></dd>
+        <dd><a href="/maritime/get_goods_info">获取进口货物信息</a></dd>
+    </dl>
+</li>
+{%endif%}
+
+{%endblock%}
+
+
+{%block main%}
+
+<div class=layui-row style="padding-top: 30px;">
+    <div class="layui-card">
+        <div class="layui-card-header">进口货物信息查找</div>
+        <div class="layui-card-body" style="width: 400px;">
+
+            <form class="layui-form" action="/maritime/get_goods_info" method="POST">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" for="container-name">商家名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name=container-name class="layui-input" id="container-name">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn">查找</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{%endblock%}

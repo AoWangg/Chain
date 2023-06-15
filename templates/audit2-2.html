@@ -12,7 +12,7 @@
     <a href="javascript:;">监管部门</a>
     <dl class="layui-nav-child">
         <dd><a href="/audit">基本信息</a></dd>
-        <dd><a href="/audit/revoke">安全生产许可证撤销</a></dd>
+        <dd><a href="/audit/revoke">安全运输许可证批准</a></dd>
         <dd class=layui-this><a href="/audit/log">实体业务查询</a></dd>
         <dd><a href="/audit/search">门限加密秘钥查询</a></dd>
         <dd><a href="/audit/accusation">查看举报信息{%if audit.reports | length >= 1%}<span class="layui-badge">{{audit.reports | length}}</span>{%endif%}</a></dd>
@@ -32,13 +32,13 @@
                     <label class=layui-form-label for="log-type">日志类型</label>
                     <div class=layui-input-block>
                         <select id="log-type" name=log-type>
-                            <option value="agency">安评机构</option>
-                            <option value="engineer">安评师</option>
+                            <option value="agency">运输企业</option>
+                            <option value="engineer">知识图谱</option>
                           </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class=layui-form-label for="keyword">安评机构或安评师名称</label>
+                    <label class=layui-form-label for="keyword">运输企业或知识图谱名称</label>
                     <div class=layui-input-block>
                         <input type="text" name=keyword class="layui-input" id="keyword">
                     </div>

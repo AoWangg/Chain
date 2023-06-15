@@ -2,25 +2,25 @@
 <li class="layui-nav-item layui-nav-itemed">
     <a href="javascript:;">实体模块</a>
     <dl class="layui-nav-child">
-        <dd><a href="/enterprise">生产企业模块</a></dd>
-        <dd><a href="/agency">安评机构模块</a></dd>
+        <dd><a href="/enterprise">运输企业模块</a></dd>
+        <dd><a href="/agency">知识节点模块</a></dd>
         <dd><a href="/audit">监管部门模块</a></dd>
     </dl>
 </li>
 {%else%}
 <li class="layui-nav-item layui-nav-itemed">
-    <a href="javascript:;">安评机构</a>
+    <a href="javascript:;">知识节点机构</a>
     <dl class="layui-nav-child">
         <dd><a href="/agency">基本信息</a></dd>
-        <dd class=layui-this><a href="/agency/engineer">安评师管理</a></dd>
-        <dd><a href="/agency/upload">安评报告上传</a></dd>
-        <dd><a href="/agency/evaluation">审查安评报告</a></dd>
+        <dd class=layui-this><a href="/agency/engineer">知识节点管理</a></dd>
+        <dd><a href="/agency/upload">知识图谱上传</a></dd>
+        <dd><a href="/agency/evaluation">知识图谱审查</a></dd>
     </dl>
 </li>
 {%endif%} {%endblock%} {%block main%}
 <div class=layui-row>
     <div class="layui-card">
-        <div class="layui-card-header">添加安评师</div>
+        <div class="layui-card-header">添加知识节点</div>
         <div class="layui-card-body" style="width: 400px;">
 
             <form class="layui-form" action="/agency/engineer" method="POST">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="layui-form-item">
                     <div class=layui-input-block>
-                        <button type="submit" class="layui-btn">添加安评师</button>
+                        <button type="submit" class="layui-btn">添加知识节点</button>
                     </div>
                 </div>
             </form>
@@ -52,7 +52,7 @@
     </div>
 
     <div class="layui-card">
-        <div class="layui-card-header">安评师列表</div>
+        <div class="layui-card-header">知识节点列表</div>
         <div class="layui-card-body">
 
             <table class="layui-table">

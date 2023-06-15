@@ -1,0 +1,75 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% extends "layout.html" %} {%block left%} {% if not is_login %}
+<li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">实体模块</a>
+    <dl class="layui-nav-child">
+        <dd><a href="/container">货物进口商模块</a></dd>
+        <dd><a href="/container">委托人模块</a></dd>
+        <dd><a href="/carrier">运输机构模块</a></dd>
+        <dd><a href="/container">仓库机构模块</a></dd>
+        <dd><a href="/maritime">海事部门模块</a></dd>
+        <dd><a href="/maritime">应急部门模块</a></dd>
+        <dd><a href="/maritime">交通部门模块</a></dd>
+        <dd><a href="/maritime">公安部门模块</a></dd>
+    </dl>
+</li>
+
+{%else%}
+<li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">货物进口商</a>
+    <dl class="layui-nav-child">
+        <dd><a href="/container">企业信息面板</a></dd>
+        <dd class=layui-this><a href="/container/report_goods_info">进口信息上报</a></dd>
+    </dl>
+</li>
+{%endif%}
+{%endblock%}
+
+
+{%block main%}
+
+<div class=layui-row style="padding-top: 30px;">
+    <div class="layui-card">
+        <div class="layui-card-header">进口信息汇报</div>
+        <div class="layui-card-body" style="width: 400px;">
+
+            <form class="layui-form" action="/container/report_goods_info" method="POST">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" for="goods-id">货物编号</label>
+                    <div class="layui-input-block">
+                        <input type="number" name=goods-id class="layui-input" id="goods-id">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" for="goods-type">货物类型</label>
+                    <div class="layui-input-block">
+                        <input type="text" name=goods-type class="layui-input" id="goods-type">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" for="goods-name">货物名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name=goods-name class="layui-input" id="goods-name">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" for="goods-he">货物重量（千克）</label>
+                    <div class="layui-input-block">
+                        <input type="number" name=goods-he class="layui-input" id="goods-he">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn">信息上报</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{%endblock%}

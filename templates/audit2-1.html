@@ -15,7 +15,7 @@
     <a href="javascript:;">监管部门</a>
     <dl class="layui-nav-child">
         <dd><a href="/audit">基本信息</a></dd>
-        <dd class=layui-this><a href="/audit/revoke">安全生产许可证撤销</a></dd>
+        <dd class=layui-this><a href="/audit/revoke">安全运输许可证批准</a></dd>
         <dd><a href="/audit/log">实体业务查询</a></dd>
         <dd><a href="/audit/search">门限加密秘钥查询</a></dd>
         <dd><a href="/audit/accusation">查看举报信息{%if audit.reports | length >= 1%}<span class="layui-badge">{{audit.reports | length}}</span>{%endif%}</a></dd>
@@ -30,7 +30,7 @@
 
 <div class=layui-row>
     <div class="layui-card">
-        <div class="layui-card-header">安全生产许可证撤销</div>
+        <div class="layui-card-header">安全运输许可证批准</div>
         <div class="layui-card-body">
             <form class="layui-form"  method="POST" action="/audit/revoke">
                 <div class="layui-form-item">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="layui-form-item">
                     <div class=layui-input-block>
-                        <button type="submit" class="layui-btn layui-btn-danger">撤销</button>
+                        <button type="submit" class="layui-btn layui-btn-danger">批准</button>
                     </div>
                 </div>
             </form>
