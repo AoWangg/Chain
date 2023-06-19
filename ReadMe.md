@@ -52,7 +52,7 @@ cd ~
 mkdir anchan & cd anchan
 curl -LO https://github.com/FISCO-BCOS/FISCO-BCOS/releases/download/v2.8.0/build_chain.sh && chmod u+x build_chain.sh #下载脚本
 curl -#LO https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/FISCO-BCOS/FISCO-BCOS/releases/v2.9.1/build_chain.sh && chmod u+x build_chain.sh  #网络差
-bash build_chain.sh -l 127.0.0.1:8 -p 30300,20200,8545 #部署4个节点
+bash build_chain.sh -l 127.0.0.1:8 -p 30300,20200,8545 #部署8个节点
 ./nodes/127.0.0.1/start_all.sh #启动所有节点
 ```
 
@@ -434,90 +434,30 @@ node.dir=node0
 python deploy.py installAll # 启动WeBASE服务
 ```
 
-## 七、压力测试工具 Hyperledger Caliper 
-最后，我们使用 Caliper 工具实现了自动化的区块链智能合约压力测试和性能评估。
+## 七、重建链的方法
 
-### 7.1 获取 Caliper 代码
+删掉nodes
 
-使用如下命令获取 Caliper 的基本代码
+重新建链
 ```sh
-mkdir benchmarks && cd benchmarks
-nvm use 8
-nvm init
-npm install --only=prod @hyperledger/caliper-cli@0.2.0
-npx caliper bind --caliper-bind-sut fisco-bcos --caliper-bind-sdk latest
-git clone https://github.com/vita-dounai/caliper-benchmarks.git
+bash build_chain.sh -l 127.0.0.1:8 -p 30300,20200,8545 #部署8个节点
 ```
 
-### 7.2 修改 Caliper 源码
-我们发现， Caliper 项目无法正常启动。通过阅读[issue1248](https://github.com/FISCO-BCOS/FISCO-BCOS/issues/1248)相关描述和 [pull request 647](https://github.com/hyperledger/caliper/pull/647/files)，我们修改了一下文件： `benchmarks/node_modules/@hyperledger/caliper-fisco-bcos/lib/channelPromise.js` 、 `benchmarks/node_modules/@hyperledger/caliper-fisco-bcos/lib/fiscoBcos.js` 、 `benchmarks/node_modules/@hyperledger/caliper-fisco-bcos/lib/web3lib/web3sync.js`。
-
-根据 [issue1721](https://github.com/FISCO-BCOS/FISCO-BCOS/issues/1721#event-3661578575)， 我们修改了 `benchmarks/node_modules/@hyperledger/caliper-fisco-bcos/package.json` 中的 `dependencies` 并添加一项 `"secp256k1": "^3.8.0"` 并执行 `npm -i `。
-
-### 7.3 创建账户
-使用如下命令创建账户：
-```
-cd ${PATH_TO_PYTHON_SDK}
-./console.py newaccount ${newAccount} ${accountPrivkey}
-```
-### 7.4 修改fisco-bcos.json 配置文件
-
-由于我们使用本地方式构建了 FISCO 区块链系统，因此需要创建新账户并修改 `benchmarks/caliper-benchmarks/networks/fisco-bcos/4nodes1group/fisco-bcos.json` 配置文件。
-
-> 注1：填写私钥 ·${accountPrivkey}· 时要删掉 `0x` 前缀
-> 注2：节点 sdk 文件夹中没有 `node.key` 和 `node.crt` 文件，必须要将任意区块链节点的 conf 文件夹中的  `node.key` 和 `node.crt` 复制到 sdk 文件夹中。最后，我们的 json 配置文件是：
-
-```json
-{
-    "caliper": {
-        "blockchain": "fisco-bcos"
-    },
-    "fisco-bcos": {
-        "config": {
-            "privateKey": "${accountPrivkey}", 
-            "account": "${newAccount}"
-        },
-        "network": {
-            "nodes": [
-                {
-                    "ip": "127.0.0.1",
-                    "rpcPort": "8545",
-                    "channelPort": "20200"
-                },
-                {
-                    "ip": "127.0.0.1",
-                    "rpcPort": "8546",
-                    "channelPort": "20201"
-                },
-                {
-                    "ip": "127.0.0.1",
-                    "rpcPort": "8547",
-                    "channelPort": "20202"
-                },
-                {
-                    "ip": "127.0.0.1",
-                    "rpcPort": "8548",
-                    "channelPort": "20203"
-                }
-            ],
-            "authentication": {
-                "key": "/home/ubuntu/anchan/nodes/127.0.0.1/sdk/node.key",
-                "cert": "/home/ubuntu/anchan/nodes/127.0.0.1/sdk/node.crt",
-                "ca": "/home/ubuntu/anchan/nodes/127.0.0.1/sdk/ca.crt"
-            },
-            "groupID": 1,
-            "timeout": 100000
-        }
-    }{以下省略}
-}
-
+连接节点
+```sh
+./nodes/127.0.0.1/start_all.sh
 ```
 
-### 7.5 执行 HelloWorld 合约测试
-我们使用了如下命令对 HelloWorld 智能合约进行性能测试。
-
+复制两个证书
+```sh
+cd python-sdk
+cp ~/anchan/nodes/127.0.0.1/sdk/* ./bin
+cd Chain
+cp -r ${PATH_TO_PYTHON_SDK}/bin/* ./bin
 ```
-npx caliper benchmark run --caliper-workspace caliper-benchmarks --caliper-benchconfig benchmarks/samples/fisco-bcos/helloworld/config.yaml  --caliper-networkconfig networks/fisco-bcos/4nodes1group/fisco-bcos.json
+
+进入webase文件夹
+```sh
+python deploy.py installAll
 ```
 
-之后，就可以对安产链相关的智能合约进行性能和压力测试。
