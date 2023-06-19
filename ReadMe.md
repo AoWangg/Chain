@@ -322,6 +322,10 @@ unzip webase-deploy.zip && cd webase-deploy
 mkdir sqlConf sqlData sqlLogs
 docker run -p 3306:3306 --name mysql56 -v $PWD/sqlConf:/etc/mysql/conf.d -v $PWD/sqlLogs:/logs -v $PWD/sqlData:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
 
+确认mysql56打开了：
+
+#docker start mysql56
+
 ```
 
 我们注意到，需要修改 `webase-deploy/comm/check.py`, 将 47 行 `checkExitedChainInfo()` 注释掉。否则 WeBASE 无法运行。
