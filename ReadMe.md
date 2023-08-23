@@ -1,6 +1,6 @@
 **仅学习使用**
 
-本文档提供了安产链项目的部署和运行指引。我们主要使用了 FISCO BCOS 区块链及其 Python SDK 、 IPFS 星际文件系统、 WeBase 区块链开发平台以及 Hyperledger Caliper 压力测试平台。
+本文档提供了项目的部署和运行指引。我们主要使用了 FISCO BCOS 区块链及其 Python SDK 、 IPFS 星际文件系统、 WeBase 区块链开发平台以及 Hyperledger Caliper 压力测试平台。
 
 ## 一、基本运行环境
 
