@@ -1,6 +1,27 @@
 **仅学习使用**
-
 本文档提供了项目的部署和运行指引。我们主要使用了 FISCO BCOS 区块链及其 Python SDK 、 IPFS 星际文件系统、 WeBase 区块链开发平台以及 Hyperledger Caliper 压力测试平台。
+
+<table width="100%">
+  <tr>
+    <td align="center" colspan="3">核心功能</td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <a href="#"><img src="https://github.com/AAooWW/Chain/blob/main/%E4%B8%8A%E6%8A%A5%E6%9F%A5%E8%AF%A2.gif"></a>
+    </td>
+    <td align="center" width="33%">
+      <a href="#"><img src="https://github.com/AAooWW/Chain/blob/main/%E8%BF%BD%E6%BA%AF.gif"></a>
+    </td>
+    <td align="center" width="33%">
+      <a href="#"><img src="https://github.com/AAooWW/Chain/blob/main/%E9%93%BE%E7%AB%AF%E7%9B%91%E6%8E%A7.gif"></a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">危险货物信息上报</td>
+    <td align="center" width="33%">危险货物信息追溯</td>
+    <td align="center" width="33%">链端监控</td>
+  </tr>
+</table>
 
 ## 一、基本运行环境
 
