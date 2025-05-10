@@ -1,4 +1,5 @@
 ### **仅学习使用**
+本项目部分参考“安产链”项目：https://github.com/FISCO-BCOS/hackathon/tree/d4095a82f124c5ba7d030276bf476442ba880d54/2021-Shenzhen-FinTechathon3/Anchan-chain
 本文档提供了项目的部署和运行指引。我们主要使用了 FISCO BCOS 区块链及其 Python SDK 、 IPFS 星际文件系统、 WeBase 区块链开发平台以及 Hyperledger Caliper 压力测试平台。
 
 <table width="100%">
